@@ -7,8 +7,6 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY", "your-default-dev-secret")
 
@@ -28,14 +26,13 @@ INSTALLED_APPS = [
 
     # Third-party apps
     'corsheaders',
+
     # Your app
     'monitor',
 ]
 
-
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Default is 'django.contrib.sessions.backends.db', but use Djongo with MongoDB
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'  # Optional: This specifies the session serializer
-
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -48,8 +45,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True  # Allows all origins for testing (You can configure it more securely in production)
-CORS_ALLOW_CREDENTIALS = True  # If you need to handle cookies or credentials
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
     'content-type',
     'authorization',
@@ -77,18 +74,18 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'safeweb.wsgi.application'
-from decouple import config  # Make sure this is imported at the top
 
+# ✅ MongoDB Atlas with Djongo
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',  # Use djongo to connect to MongoDB
+        'ENGINE': 'djongo',
         'NAME': 'safewebguard_db',
         'CLIENT': {
-            'host': '',
-            'username': '',
-            'password': '',
+            'host': 'mongodb+srv://tagtrendzz:bhargavi@cluster0.7jv5hao.mongodb.net/safewebguard_db?retryWrites=true&w=majority',
+            'username': 'tagtrendzz',
+            'password': 'bhargavi',
             'authSource': 'admin',
-            'authMechanism': '',
+            'authMechanism': 'SCRAM-SHA-1',
         }
     }
 }
@@ -113,24 +110,12 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'monitor' / 'static']
 
-# Default PK
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# settings.py
+# Email config
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''  # You should store this securely in environment variables or use django-environ
-from mongoengine import connect
-
-# Connect to MongoDB
-connect(
-    db='safewebguard_db',
-    username='',
-    password='',
-    host='mongodb',
-    authentication_source='admin',  # Important if you're using Atlas
-    authMechanism='SCRAM-SHA-1'
-)
+EMAIL_HOST_USER = 'projectb1885@gmail.com'
+EMAIL_HOST_PASSWORD = 'uiqo vaau gpcz uepk'  # ⚠️ Better move to .env
