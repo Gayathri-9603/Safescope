@@ -135,9 +135,4 @@ Child → Browsing Activity → Chrome Extension → Django Backend → MongoDB 
 
 
 
----
-
-## ✍️ Developed By
-
-* **Nagulapally Bhargavi** - https://github.com/bhargavi852004
 
